@@ -3,18 +3,41 @@ require_relative 'mars_rover'
 
 describe "MarsRover" do
 
-  my_rover = MarsRover.new('1 2 N')
+  my_rover_north = MarsRover.new('1 2 N')
+  my_rover_south = MarsRover.new('1 2 S')
+  my_rover_east = MarsRover.new('1 2 E')
+  my_rover_west = MarsRover.new('1 2 W')
 
   it "has a starting location" do
-    expect(my_rover.location).to eq('1 2')
+    expect(my_rover_north.location).to eq('1 2')
   end
 
   it "has a starting directional orientation" do
-    expect(my_rover.orientation).to eq('N')
+    expect(my_rover_north.orientation).to eq('N')
   end
 
   it "outputs its status: location and directional orientation" do
-    expect(my_rover.status).to eq('1 2 N')
+    expect(my_rover_north.status).to eq('1 2 N')
+  end
+
+  it "is able to move forward when facing North" do
+    my_rover_north.move_forward
+    expect(my_rover_north.get_status).to eq('1 3 N')
+  end
+
+  it "is able to move forward when facing South" do
+    my_rover_south.move_forward
+    expect(my_rover_south.get_status).to eq('1 1 S')
+  end
+
+  it "is able to move forward when facing East" do
+    my_rover_east.move_forward
+    expect(my_rover_east.get_status).to eq('2 2 E')
+  end
+
+  it "is able to move forward when facing West" do
+    my_rover_west.move_forward
+    expect(my_rover_west.get_status).to eq('0 2 W')
   end
 
 end
@@ -37,9 +60,3 @@ OUTPUT:
 5 1 E
 
 =end
-
-# WILL LIKELY CREATE A INPUT PARSER MODULE
-# WILL LIKELY CREATE A CLASS THAT CREATES A GRID BASED ON THE FIRST LINE OF CODE
-# HAVE A MODULE CALLED mars_rover.rb <- which deals with state that a mars rover would have like knowing its position & orientation & stuff (color?)
-# CREATE A CONFIG.ru <- which will require all the components, so that application.rb will only require the config.ru
-# CREATE A FILE CALLED APPLICATION RB <- which plays with the mars_rover, rover_command_parser, grid_creator

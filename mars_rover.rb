@@ -20,6 +20,27 @@ class MarsRover
     @location + ' ' + @orientation
   end
 
+  def move_forward
+    case @orientation
+    when "N"
+      @location[-1] = "#{@location[-1].to_i + 1}"
+    when "S"
+      @location[-1] = "#{@location[-1].to_i - 1}"
+    when "E"
+      @location[0] = "#{@location[0].to_i + 1}"
+    when "W"
+      @location[0] = "#{@location[0].to_i - 1}"
+    else
+      puts "Rover's current orientation is invalid"
+    end
+  end
+
+  def turn_right
+  end
+
+  def turn_left
+  end
+
 end
 
 =begin
