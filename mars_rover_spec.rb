@@ -40,6 +40,26 @@ describe "MarsRover" do
     expect(my_rover_west.get_status).to eq('0 2 W')
   end
 
+  it "is able to turn right when facing N" do
+    my_rover_north.turn_right
+    expect(my_rover_north.orientation).to eq('E')
+  end
+
+  it "is able to turn right when facing S" do
+    my_rover_south.turn_right
+    expect(my_rover_south.orientation).to eq('W')
+  end
+
+  it "is able to turn right when facing E" do
+    my_rover_east.turn_right
+    expect(my_rover_east.orientation).to eq('S')
+  end
+
+  it "is able to turn right when facing W" do
+    my_rover_west.turn_right
+    expect(my_rover_west.orientation).to eq('N')
+  end
+
 end
 
 =begin

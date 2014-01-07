@@ -36,6 +36,16 @@ class MarsRover
   end
 
   def turn_right
+    case @orientation
+    when "N"
+      @orientation = "E"
+    when "S"
+      @orientation = "W"
+    when "E"
+      @orientation = "S"
+    when "W"
+      @orientation = "N"
+    end
   end
 
   def turn_left
