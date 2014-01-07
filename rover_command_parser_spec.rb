@@ -64,7 +64,7 @@ describe "RoverCommandParser" do
     expect(RoverCommandParser.create_rovers_hash(one_rover_data, 1)).to eq(
       [
         {
-        :rover => {starting_position: "3 2 E", movements: "LMR"}
+        :rover_movement_data => {starting_position: "3 2 E", directions: "LMR"}
         }
       ])
   end
@@ -74,13 +74,14 @@ describe "RoverCommandParser" do
     expect(RoverCommandParser.create_rovers_hash(two_rovers_data, 2)).to eq(
       [
         {
-          :rover => {
+          :rover_movement_data =>
+          {
             :starting_position => "3 3 E",
-            :movements => "LMR"
+            :directions => "LMR"
           }
         },
         {
-          :rover => {starting_position: "2 1 N", movements: "MLM"}
+          :rover_movement_data => {starting_position: "2 1 N", directions: "MLM"}
         }
       ])
   end
@@ -92,7 +93,7 @@ describe "RoverCommandParser" do
         :rovers_hash =>
           [
             {
-              :rover => {starting_position: "3 2 E", movements: "LMR"}
+              :rover_movement_data => {starting_position: "3 2 E", directions: "LMR"}
             }
           ]
       })
@@ -104,8 +105,8 @@ describe "RoverCommandParser" do
         :setup_data => {grid_dimension: "6 6", number_of_rovers: 2},
         :rovers_hash =>
           [
-            {:rover => {starting_position: "3 3 E", movements: "LMR"}},
-            {:rover=> {starting_position: "2 1 N", movements: "MLM"}}
+            {:rover_movement_data => {starting_position: "3 3 E", directions: "LMR"}},
+            {:rover_movement_data=> {starting_position: "2 1 N", directions: "MLM"}}
           ]
       })
   end
@@ -116,9 +117,9 @@ describe "RoverCommandParser" do
         :setup_data => {grid_dimension: "6 6", number_of_rovers: 3},
         :rovers_hash =>
           [
-            {:rover => {starting_position: "3 3 E", movements: "LMR"}},
-            {:rover => {starting_position: "2 1 N", movements: "MLM"}},
-            {:rover => {starting_position: "3 4 S", movements: "RMM"}}
+            {:rover_movement_data => {starting_position: "3 3 E", directions: "LMR"}},
+            {:rover_movement_data => {starting_position: "2 1 N", directions: "MLM"}},
+            {:rover_movement_data => {starting_position: "3 4 S", directions: "RMM"}}
           ]
       })
   end
