@@ -74,6 +74,30 @@ describe "MarsRover" do
 
   end
 
+  context "Left Turn:" do
+
+    it "changes orientation from North to West" do
+      @my_rover_north.turn_left
+      expect(@my_rover_north.orientation).to eq('W')
+    end
+
+    it "changes orientation from South to East" do
+      @my_rover_south.turn_left
+      expect(@my_rover_south.orientation).to eq('E')
+    end
+
+    it "changes orientation from East to North" do
+      @my_rover_east.turn_left
+      expect(@my_rover_east.orientation).to eq('N')
+    end
+
+    it "changes orientation from West to South" do
+      @my_rover_west.turn_left
+      expect(@my_rover_west.orientation).to eq('S')
+    end
+
+  end
+
 end
 
 =begin
