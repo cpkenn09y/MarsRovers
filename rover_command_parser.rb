@@ -11,16 +11,17 @@ module RoverCommandParser
   end
 
   def self.get_grid_dimension(setup_data)
-    setup_data[:grid_dimension]
+    extract_height_width(setup_data)
+  end
+
+  def self.extract_height_width(setup_data)
+    raw_dimensions = setup_data[:grid_dimension]
+    dimensions_separated = raw_dimensions.split(' ')
+    {height: dimensions_separated[0].to_i, width: dimensions_separated[1].to_i}
   end
 
   def self.get_number_of_rovers(setup_data)
     setup_data[:number_of_rovers]
-  end
-
-  def self.extract_height_width(raw_dimensions)
-    dimensions_separated = raw_dimensions.split(' ')
-    {height: dimensions_separated[0].to_i, width: dimensions_separated[1].to_i}
   end
 
   def self.determine_number_of_grid_units(dimensions)
@@ -31,7 +32,7 @@ module RoverCommandParser
     cleaned_input[1..-1]
   end
 
-  def self.create_rovers_hash(rovers_data, number_of_rovers)
+  def self.create_rover_hashes(rovers_data, number_of_rovers)
 
     rovers = []
 
@@ -45,6 +46,10 @@ module RoverCommandParser
     rovers
   end
 
+  def self.get_starting_position(rover_hash)
+    rover_hash[0][:rover_movement_data][:starting_position]
+  end
+
   def self.assess(user_input)
     cleaned_input = clean_user_input(user_input)
 
@@ -52,9 +57,9 @@ module RoverCommandParser
     number_of_rovers = setup_data[:number_of_rovers]
 
     rovers_raw_data = extract_rovers_raw_data(cleaned_input)
-    rovers_hash = create_rovers_hash(rovers_raw_data, number_of_rovers)
+    rovers_hash = create_rover_hashes(rovers_raw_data, number_of_rovers)
 
-    {setup_data: setup_data, rovers_hash: rovers_hash}
+    {setup_data: setup_data, rovers_movement_data: rovers_hash}
   end
 
 end
