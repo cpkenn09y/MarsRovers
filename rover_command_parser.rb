@@ -10,6 +10,14 @@ module RoverCommandParser
     {:grid_dimension => cleaned_input[0], :number_of_rovers => cleaned_input.length / 2}
   end
 
+  def self.get_grid_dimension(setup_data)
+    setup_data[:grid_dimension]
+  end
+
+  def self.get_number_of_rovers(setup_data)
+    setup_data[:number_of_rovers]
+  end
+
   def self.extract_height_width(raw_dimensions)
     dimensions_separated = raw_dimensions.split(' ')
     {height: dimensions_separated[0].to_i, width: dimensions_separated[1].to_i}
