@@ -37,7 +37,7 @@ module RoverCommandParser
     0.upto(number_of_rovers-1) do |i|
       rovers.push(:rover_movement_data => {
         :starting_position => rovers_data[i*2],
-        :directions => rovers_data[i*2+1]
+        :commands => rovers_data[i*2+1]
       })
     end
 
