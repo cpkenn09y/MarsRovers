@@ -30,22 +30,22 @@ describe "MarsRover" do
 
     it "when facing North" do
       @my_rover_north.move_forward
-      expect(@my_rover_north.get_status).to eq('1 3 N')
+      expect(@my_rover_north.status).to eq('1 3 N')
     end
 
     it "when facing South" do
       @my_rover_south.move_forward
-      expect(@my_rover_south.get_status).to eq('1 1 S')
+      expect(@my_rover_south.status).to eq('1 1 S')
     end
 
     it "when facing East" do
       @my_rover_east.move_forward
-      expect(@my_rover_east.get_status).to eq('2 2 E')
+      expect(@my_rover_east.status).to eq('2 2 E')
     end
 
     it "when facing West" do
       @my_rover_west.move_forward
-      expect(@my_rover_west.get_status).to eq('0 2 W')
+      expect(@my_rover_west.status).to eq('0 2 W')
     end
 
   end
@@ -94,6 +94,18 @@ describe "MarsRover" do
     it "changes orientation from West to South" do
       @my_rover_west.turn_left
       expect(@my_rover_west.orientation).to eq('S')
+    end
+
+  end
+
+  context "Perform Commands:" do
+
+    it "properly moves in response to valid commands" do
+      @my_rover_north.perform_commands("MLM")
+      expect(@my_rover_north.status).to eq('0 3 W')
+
+      @my_rover_west.perform_commands("LMLM")
+      expect(@my_rover_west.status).to eq('2 1 E')
     end
 
   end

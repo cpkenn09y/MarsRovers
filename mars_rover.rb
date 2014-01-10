@@ -1,11 +1,17 @@
 class MarsRover
 
-  attr_reader :location, :orientation, :status
+  POSSIBLE_COMMANDS = [{"M" => "Move Forward"}, {"R" => "Turn Right"}, {"L" => "Turn Left"}]
+
+  attr_reader :location, :orientation
 
   def initialize(configuration)
     @location = get_location(configuration)
     @orientation = get_orientation(configuration)
-    @status = get_status
+    @status = status
+  end
+
+  def status
+    @location + ' ' + @orientation
   end
 
   def get_location(configuration)
@@ -16,8 +22,34 @@ class MarsRover
     configuration.slice(-1)
   end
 
-  def get_status
-    @location + ' ' + @orientation
+  def perform_commands(commands)
+    split_commands = commands.split('')
+    split_commands.each do |command|
+      determine_correct_action(command)
+    end
+  end
+
+  def determine_correct_action(command)
+    case command
+    when "M"
+      move_forward
+    when "R"
+      turn_right
+    when "L"
+      turn_left
+    else
+      invalid_command = command
+      print_command_error(invalid_command)
+    end
+  end
+
+  def print_command_error(invalid_command)
+    puts "You have provided an invalid command"
+    puts "The command you provided, #{invalid_command}, has to match one of the commands below"
+    puts "HERE IS THE LIST OF POSSIBLE COMMANDS:"
+    POSSIBLE_COMMANDS.each do |possible_command|
+      possible_command.each {|command, description| puts "#{command} <-- #{description}"}
+    end
   end
 
   def move_forward
