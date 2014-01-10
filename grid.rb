@@ -15,10 +15,6 @@ class Grid
     @layout_1d.each_slice(@columns) {|row| p row}
   end
 
-  def get_origin_index
-    @layout_1d.length - (@columns)
-  end
-
   def place_onto_grid(avatar, starting_location)
     starting_coordinate = convert_to_coordinate(starting_location)
     x_coordinate = starting_coordinate[0]
@@ -32,6 +28,10 @@ class Grid
   def get_layout_1d
     grid_units = (@columns) * (@rows)
     Array.new(grid_units) {'0'}
+  end
+
+  def get_origin_index
+    @layout_1d.length - (@columns)
   end
 
   def convert_to_coordinate(starting_location)
