@@ -1,5 +1,3 @@
-require 'debugger'
-
 module RoverCommandParser
 
   def self.clean_user_input(user_input)
@@ -11,13 +9,13 @@ module RoverCommandParser
   end
 
   def self.get_grid_dimension(setup_data)
-    extract_height_width(setup_data)
+    extract_y_max_x_max(setup_data)
   end
 
-  def self.extract_height_width(setup_data)
+  def self.extract_y_max_x_max(setup_data)
     raw_dimensions = setup_data[:grid_dimension]
     dimensions_separated = raw_dimensions.split(' ')
-    {height: dimensions_separated[0].to_i, width: dimensions_separated[1].to_i}
+    {y_max: dimensions_separated[0].to_i, x_max: dimensions_separated[1].to_i}
   end
 
   def self.get_number_of_rovers(setup_data)
@@ -25,7 +23,7 @@ module RoverCommandParser
   end
 
   def self.determine_number_of_grid_units(dimensions)
-    dimensions[:height] * dimensions[:width]
+    dimensions[:y_max] * dimensions[:x_max]
   end
 
   def self.extract_rovers_raw_data(cleaned_input)

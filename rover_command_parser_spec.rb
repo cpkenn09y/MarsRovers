@@ -28,13 +28,13 @@ describe "RoverCommandParser" do
     expect(RoverCommandParser.clean_user_input(user_input_1)).to eq(["4 4", "3 2 E", "LMR"])
   end
 
-  it "extracts height and width from raw dimensions data" do
+  it "extracts y_max and x_max from raw dimensions data" do
     setup_data = {grid_dimension: '5 3' }
-    expect(RoverCommandParser.extract_height_width(setup_data)).to eq({height: 5, width: 3})
+    expect(RoverCommandParser.extract_y_max_x_max(setup_data)).to eq({y_max: 5, x_max: 3})
   end
 
   it "determines total number of grid units from dimensions hash" do
-    dimensions = {height: 5, width: 3}
+    dimensions = {y_max: 5, x_max: 3}
     expect(RoverCommandParser.determine_number_of_grid_units(dimensions)).to eq(15)
   end
 
@@ -62,7 +62,7 @@ describe "RoverCommandParser" do
   it "gets the grid_dimension out of setup_data" do
     cleaned_user_input = ["6 5", "3 3 E", "LMR", "2 1 N", "MLM", "3 2 E", "LMM"]
     setup_data = RoverCommandParser.extract_setup_data(cleaned_user_input)
-    expect(RoverCommandParser.get_grid_dimension(setup_data)).to eq({height: 6, width: 5})
+    expect(RoverCommandParser.get_grid_dimension(setup_data)).to eq({y_max: 6, x_max: 5})
   end
 
   it "gets the number_of_rovers out of setup_data" do
