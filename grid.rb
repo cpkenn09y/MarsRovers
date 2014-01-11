@@ -12,13 +12,19 @@ class Grid
   end
 
   def print
-    @layout_1d.each_slice(@columns) {|row| p row}
+    @layout_1d.each_slice(@columns) {|row| p row.join(' ')}
+    add_extra_space
   end
 
-  def place_onto_grid(avatar, starting_location)
-    starting_coordinate = convert_to_coordinate(starting_location)
-    x_coordinate = starting_coordinate[0]
-    y_coordinate = starting_coordinate[1]
+  def reset
+    @layout_1d.map! {|grid_unit| grid_unit = "0"}
+  end
+
+  def place_onto_grid(avatar, target_location, rover_orientation)
+    cleaned_target_coordinate = convert_to_coordinate(target_location)
+    x_coordinate = cleaned_target_coordinate[0]
+    y_coordinate = cleaned_target_coordinate[1]
+    puts "Placing #{avatar} at the location (#{x_coordinate}, #{y_coordinate}) #{rover_orientation}"
     grid_index_to_replace = get_grid_index_to_replace(x_coordinate, y_coordinate)
     @layout_1d[grid_index_to_replace] = avatar
   end
@@ -28,6 +34,10 @@ class Grid
   def get_layout_1d
     grid_units = (@columns) * (@rows)
     Array.new(grid_units) {'0'}
+  end
+
+  def add_extra_space
+    puts ""
   end
 
   def get_origin_index
