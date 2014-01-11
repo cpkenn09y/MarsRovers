@@ -29,7 +29,8 @@ describe "Grid" do
     it "is able to place an avatar onto the origin" do
       avatar = '1'
       starting_location = '0 0'
-      @my_grid.place_onto_grid(avatar, starting_location)
+      orientation = 'N'
+      @my_grid.place_onto_grid(avatar, starting_location, orientation)
       expect(@my_grid.layout_1d).to eq(['0', '0', '0',
                                         '0', '0', '0',
                                         '1', '0', '0'])
@@ -38,7 +39,8 @@ describe "Grid" do
     it "is able to place an avatar onto any specified starting location" do
       avatar = '1'
       starting_location = '2 1'
-      @my_grid.place_onto_grid(avatar, starting_location)
+      orientation = 'S'
+      @my_grid.place_onto_grid(avatar, starting_location, orientation)
       expect(@my_grid.layout_1d).to eq(['0', '0', '0',
                                         '0', '0', '1',
                                         '0', '0', '0',])
