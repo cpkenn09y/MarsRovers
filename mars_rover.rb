@@ -65,6 +65,7 @@ class MarsRover
     else
       puts "Rover's current orientation is invalid"
     end
+    update_status
   end
 
   def turn_right
@@ -78,6 +79,7 @@ class MarsRover
     when "W"
       @orientation = "N"
     end
+    update_status
   end
 
   def turn_left
@@ -91,6 +93,11 @@ class MarsRover
     when "W"
       @orientation = "S"
     end
+    update_status
+  end
+
+  def update_status
+    @status = status
   end
 
 end
