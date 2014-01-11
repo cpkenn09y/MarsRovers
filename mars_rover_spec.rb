@@ -3,18 +3,111 @@ require_relative 'mars_rover'
 
 describe "MarsRover" do
 
-  my_rover = MarsRover.new('1 2 N')
+  before(:each) {
+    @my_rover_north = MarsRover.new('1 2 N')
+    @my_rover_south = MarsRover.new('1 2 S')
+    @my_rover_east = MarsRover.new('1 2 E')
+    @my_rover_west = MarsRover.new('1 2 W')
+  }
 
-  it "has a starting location" do
-    expect(my_rover.location).to eq('1 2')
+  context "Initialization:" do
+
+    it "has a starting location" do
+      expect(@my_rover_north.location).to eq('1 2')
+    end
+
+    it "has a directional orientation" do
+      expect(@my_rover_north.orientation).to eq('N')
+    end
+
+    it "has a status which contains location and directional orientation" do
+      expect(@my_rover_north.status).to eq('1 2 N')
+    end
+
   end
 
-  it "has a starting directional orientation" do
-    expect(my_rover.orientation).to eq('N')
+  context 'Moves Forward:' do
+
+    it "when facing North" do
+      @my_rover_north.move_forward
+      expect(@my_rover_north.status).to eq('1 3 N')
+    end
+
+    it "when facing South" do
+      @my_rover_south.move_forward
+      expect(@my_rover_south.status).to eq('1 1 S')
+    end
+
+    it "when facing East" do
+      @my_rover_east.move_forward
+      expect(@my_rover_east.status).to eq('2 2 E')
+    end
+
+    it "when facing West" do
+      @my_rover_west.move_forward
+      expect(@my_rover_west.status).to eq('0 2 W')
+    end
+
   end
 
-  it "outputs its status: location and directional orientation" do
-    expect(my_rover.status).to eq('1 2 N')
+  context "Right Turn:" do
+
+    it "changes orientation from North to East" do
+      @my_rover_north.turn_right
+      expect(@my_rover_north.orientation).to eq('E')
+    end
+
+    it "changes orientation from South to West" do
+      @my_rover_south.turn_right
+      expect(@my_rover_south.orientation).to eq('W')
+    end
+
+    it "changes orientation from East to South" do
+      @my_rover_east.turn_right
+      expect(@my_rover_east.orientation).to eq('S')
+    end
+
+    it "changes orientation from West to North" do
+      @my_rover_west.turn_right
+      expect(@my_rover_west.orientation).to eq('N')
+    end
+
+  end
+
+  context "Left Turn:" do
+
+    it "changes orientation from North to West" do
+      @my_rover_north.turn_left
+      expect(@my_rover_north.orientation).to eq('W')
+    end
+
+    it "changes orientation from South to East" do
+      @my_rover_south.turn_left
+      expect(@my_rover_south.orientation).to eq('E')
+    end
+
+    it "changes orientation from East to North" do
+      @my_rover_east.turn_left
+      expect(@my_rover_east.orientation).to eq('N')
+    end
+
+    it "changes orientation from West to South" do
+      @my_rover_west.turn_left
+      expect(@my_rover_west.orientation).to eq('S')
+    end
+
+  end
+
+  context "Perform Commands:" do
+
+    it "properly moves in response to valid commands" do
+      @my_rover_north.perform_commands("MLM")
+      expect(@my_rover_north.status).to eq('0 3 W')
+
+      @my_rover_west.perform_commands("LMLM")
+      expect(@my_rover_west.status).to eq('2 1 E')
+    end
+
   end
 
 end
@@ -37,9 +130,3 @@ OUTPUT:
 5 1 E
 
 =end
-
-# WILL LIKELY CREATE A INPUT PARSER MODULE
-# WILL LIKELY CREATE A CLASS THAT CREATES A GRID BASED ON THE FIRST LINE OF CODE
-# HAVE A MODULE CALLED mars_rover.rb <- which deals with state that a mars rover would have like knowing its position & orientation & stuff (color?)
-# CREATE A CONFIG.ru <- which will require all the components, so that application.rb will only require the config.ru
-# CREATE A FILE CALLED APPLICATION RB <- which plays with the mars_rover, rover_command_parser, grid_creator

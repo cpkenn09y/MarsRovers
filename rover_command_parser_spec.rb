@@ -28,13 +28,13 @@ describe "RoverCommandParser" do
     expect(RoverCommandParser.clean_user_input(user_input_1)).to eq(["4 4", "3 2 E", "LMR"])
   end
 
-  it "extracts height and width from raw dimensions data" do
-    raw_dimensions = '5 3'
-    expect(RoverCommandParser.extract_height_width(raw_dimensions)).to eq({height: 5, width: 3})
+  it "extracts x_max and y_max from raw dimensions data" do
+    setup_data = {grid_dimension: '5 3' }
+    expect(RoverCommandParser.extract_x_max_y_max(setup_data)).to eq({x_max: 5, y_max: 3})
   end
 
   it "determines total number of grid units from dimensions hash" do
-    dimensions = {height: 5, width: 3}
+    dimensions = {x_max: 5, y_max: 3}
     expect(RoverCommandParser.determine_number_of_grid_units(dimensions)).to eq(15)
   end
 
@@ -59,67 +59,89 @@ describe "RoverCommandParser" do
       })
   end
 
+  it "gets the grid_dimension out of setup_data" do
+    cleaned_user_input = ["6 5", "3 3 E", "LMR", "2 1 N", "MLM", "3 2 E", "LMM"]
+    setup_data = RoverCommandParser.extract_setup_data(cleaned_user_input)
+    expect(RoverCommandParser.get_grid_dimension(setup_data)).to eq({x_max: 6, y_max: 5})
+  end
+
+  it "gets the number_of_rovers out of setup_data" do
+    cleaned_user_input = ["6 6", "3 3 E", "LMR", "2 1 N", "MLM", "3 2 E", "LMM"]
+    setup_data = RoverCommandParser.extract_setup_data(cleaned_user_input)
+    expect(RoverCommandParser.get_number_of_rovers(setup_data)).to eq(3)
+  end
+
   it "creates a rover hash for a single rover" do
     one_rover_data = ["3 2 E", "LMR"]
-    expect(RoverCommandParser.create_rovers_hash(one_rover_data, 1)).to eq(
+    expect(RoverCommandParser.create_rover_hashes(one_rover_data, 1)).to eq(
       [
         {
-        :rover_movement_data => {starting_position: "3 2 E", directions: "LMR"}
+        :rover_movement_data => {starting_position: "3 2 E", commands: "LMR"}
         }
       ])
   end
 
   it "creates a rovers hash for multiple rovers" do
     two_rovers_data = ["3 3 E", "LMR", "2 1 N", "MLM"]
-    expect(RoverCommandParser.create_rovers_hash(two_rovers_data, 2)).to eq(
+    expect(RoverCommandParser.create_rover_hashes(two_rovers_data, 2)).to eq(
       [
         {
           :rover_movement_data =>
           {
             :starting_position => "3 3 E",
-            :directions => "LMR"
+            :commands => "LMR"
           }
         },
         {
-          :rover_movement_data => {starting_position: "2 1 N", directions: "MLM"}
+          :rover_movement_data =>
+          {
+            starting_position: "2 1 N",
+            commands: "MLM"
+          }
         }
       ])
   end
 
-  it "parses user_input into setup_data and a rovers_hash for a single rover" do
+  it "gets the starting_position out of rover_movement_data for one rover" do
+    one_rover_data = ["3 2 E", "LMR"]
+    one_rover_hash = RoverCommandParser.create_rover_hashes(one_rover_data, 1)
+    expect(RoverCommandParser.get_starting_position(one_rover_hash)).to eq("3 2 E")
+  end
+
+  it "parses user_input into setup_data and a rovers_movement_data for a single rover" do
     expect(RoverCommandParser.assess(user_input_1)).to eq(
       {
         :setup_data => {grid_dimension: "4 4", number_of_rovers: 1},
-        :rovers_hash =>
+        :rovers_movement_data =>
           [
             {
-              :rover_movement_data => {starting_position: "3 2 E", directions: "LMR"}
+              :rover_movement_data => {starting_position: "3 2 E", commands: "LMR"}
             }
           ]
       })
   end
 
-  it "parses user_input into setup_data and a rovers_hash for two rovers" do
+  it "parses user_input into setup_data and a rovers_movement_data for two rovers" do
     expect(RoverCommandParser.assess(user_input_2)).to eq(
       {
         :setup_data => {grid_dimension: "6 6", number_of_rovers: 2},
-        :rovers_hash =>
+        :rovers_movement_data =>
           [
-            {:rover_movement_data => {starting_position: "3 3 E", directions: "LMR"}},
-            {:rover_movement_data=> {starting_position: "2 1 N", directions: "MLM"}}
+            {:rover_movement_data => {starting_position: "3 3 E", commands: "LMR"}},
+            {:rover_movement_data=> {starting_position: "2 1 N", commands: "MLM"}}
           ]
       })
   end
 
-  it "parses user_input into setup_data and a rovers_hash for multiple rover" do
+  it "parses user_input into setup_data and a rovers_movement_data for multiple rover" do
     expect(RoverCommandParser.assess(user_input_3)).to eq(
       {
         :setup_data => {grid_dimension: "6 6", number_of_rovers: 3},
-        :rovers_hash =>
+        :rovers_movement_data =>
           [
-            {:rover_movement_data => {starting_position: "3 3 E", directions: "LMR"}},
-            {:rover_movement_data => {starting_position: "2 1 N", directions: "MLM"}},
-            {:rover_movement_data => {starting_position: "3 4 S", directions: "RMM"}}
+            {:rover_movement_data => {starting_position: "3 3 E", commands: "LMR"}},
+            {:rover_movement_data => {starting_position: "2 1 N", commands: "MLM"}},
+            {:rover_movement_data => {starting_position: "3 4 S", commands: "RMM"}}
           ]
       })
   end
