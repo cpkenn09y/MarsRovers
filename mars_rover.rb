@@ -1,6 +1,7 @@
 class MarsRover
 
   POSSIBLE_COMMANDS = [{"M" => "Move Forward"}, {"R" => "Turn Right"}, {"L" => "Turn Left"}]
+  COMPASS = {north: "N", south: "S", east: "E", west: "W"}
 
   attr_reader :location, :orientation
 
@@ -54,13 +55,13 @@ class MarsRover
 
   def move_forward
     case @orientation
-    when "N"
+    when COMPASS[:north]
       @location[-1] = "#{@location[-1].to_i + 1}"
-    when "S"
+    when COMPASS[:south]
       @location[-1] = "#{@location[-1].to_i - 1}"
-    when "E"
+    when COMPASS[:east]
       @location[0] = "#{@location[0].to_i + 1}"
-    when "W"
+    when COMPASS[:west]
       @location[0] = "#{@location[0].to_i - 1}"
     else
       puts "Rover's current orientation is invalid"
@@ -70,28 +71,28 @@ class MarsRover
 
   def turn_right
     case @orientation
-    when "N"
-      @orientation = "E"
-    when "S"
-      @orientation = "W"
-    when "E"
-      @orientation = "S"
-    when "W"
-      @orientation = "N"
+    when COMPASS[:north]
+      @orientation = COMPASS[:east]
+    when COMPASS[:south]
+      @orientation = COMPASS[:west]
+    when COMPASS[:east]
+      @orientation = COMPASS[:south]
+    when COMPASS[:west]
+      @orientation = COMPASS[:north]
     end
     update_status
   end
 
   def turn_left
     case @orientation
-    when "N"
-      @orientation = "W"
-    when "S"
-      @orientation = "E"
-    when "E"
-      @orientation = "N"
-    when "W"
-      @orientation = "S"
+    when COMPASS[:north]
+      @orientation = COMPASS[:west]
+    when COMPASS[:south]
+      @orientation = COMPASS[:east]
+    when COMPASS[:east]
+      @orientation = COMPASS[:north]
+    when COMPASS[:west]
+      @orientation = COMPASS[:south]
     end
     update_status
   end
@@ -101,22 +102,3 @@ class MarsRover
   end
 
 end
-
-=begin
-
-Rover will receive commands, and then output its current location and its orientation.
-
-Able to move multiple rovers.
-
-INPUT:
-5 5
-1 2 N
-LMLMLMLMM
-3 3 E
-MMRMMRMRRM
-
-OUTPUT:
-1 3 N
-5 1 E
-
-=end
