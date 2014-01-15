@@ -136,27 +136,24 @@ ApplicationController.parse_and_execute(user_input_given)
 
 ### Uncomment Lines 141-160 to run the application with eight rovers ###
 
-=begin
 
-user_input_8_rovers =
-"8 8
-3 4 N
-MRM
-2 1 E
-LMMR
-5 5 S
-MML
-4 4 N
-MMRM
-5 2 E
-MMR
-0 0 N
-MMRMLL
-7 7 S
-MMRMM
-6 1 W
-MMRMML"
+# user_input_8_rovers =
+# "8 8
+# 3 4 N
+# MRM
+# 2 1 E
+# LMMR
+# 5 5 S
+# MML
+# 4 4 N
+# MMRM
+# 5 2 E
+# MMR
+# 0 0 N
+# MMRMLL
+# 7 7 S
+# MMRMM
+# 6 1 W
+# MMRMML"
 
-ApplicationController.parse_and_execute(user_input_8_rovers)
-
-=end
+# ApplicationController.parse_and_execute(user_input_8_rovers)

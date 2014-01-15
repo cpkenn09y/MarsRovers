@@ -22,10 +22,6 @@ module RoverCommandParser
     setup_data[:number_of_rovers]
   end
 
-  def self.determine_number_of_grid_units(dimensions)
-    dimensions[:x_max] * dimensions[:y_max]
-  end
-
   def self.extract_rovers_raw_data(cleaned_input)
     cleaned_input[1..-1]
   end

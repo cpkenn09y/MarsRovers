@@ -97,9 +97,11 @@ MMRMMRMRRM"
   end
 
   context "Parse and Execute:" do
+
     it "runs user input through parser and has rovers execute commands" do
       expect(ApplicationController.parse_and_execute(user_input)).to eq(["1 3 N", "5 1 E"])
     end
+
   end
 
 end
