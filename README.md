@@ -34,7 +34,7 @@ Once I restructured my code to encompass this change, it became possible to repr
 
 1) From the Terminal, go into the folder containing all the files
 2) Type the following code:
-* ruby application.rb
+* ruby application_controller.rb
 
 Note: For funsies, open up application.rb and uncomment the lines of code specified at the bottom. It will run the program with three or eight rovers.
 
