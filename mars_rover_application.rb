@@ -1,4 +1,4 @@
-require_relative 'application_controller'
+require_relative 'lib/application_controller'
 
 class MarsRoverApplication
 

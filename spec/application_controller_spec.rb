@@ -1,5 +1,4 @@
-require 'rspec'
-require_relative 'application_controller'
+require_relative 'spec_helper'
 
 describe "ApplicationController" do
 

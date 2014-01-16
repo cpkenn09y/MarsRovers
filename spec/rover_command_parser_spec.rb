@@ -1,5 +1,4 @@
-require 'rspec'
-require_relative 'rover_command_parser'
+require_relative 'spec_helper'
 
 describe "RoverCommandParser" do
 

@@ -1,5 +1,4 @@
-require 'rspec'
-require_relative 'grid'
+require_relative 'spec_helper'
 
 describe "Grid" do
 

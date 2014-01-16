@@ -1,5 +1,4 @@
-require 'rspec'
-require_relative 'mars_rover'
+require_relative 'spec_helper'
 
 describe "MarsRover" do
 

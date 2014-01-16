@@ -1,6 +1,4 @@
-require 'rspec'
-require_relative 'mars_rover_application'
-require_relative 'mock_rover_app'
+require_relative 'spec_helper'
 
 describe "MarsRoverApplication" do
 
