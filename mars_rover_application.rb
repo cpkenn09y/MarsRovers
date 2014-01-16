@@ -68,7 +68,11 @@ class MarsRoverApplication
 
 end
 
-if ARGV[0] != "mars_rover_application_spec.rb"
+def not_a_test?(argv)
+  argv[0] != "mars_rover_application_spec.rb"
+end
+
+if not_a_test?(ARGV)
   my_application = MarsRoverApplication.new(ARGV)
   my_application.run!
 end

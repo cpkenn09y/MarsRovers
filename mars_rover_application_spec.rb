@@ -26,4 +26,5 @@ MMRMMRMRRM"
       expect(my_app.run!).to eq(["1 2 S", "1 3 N", "4 1 N"])
     end
   end
+
 end

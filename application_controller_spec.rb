@@ -1,6 +1,5 @@
 require 'rspec'
 require_relative 'application_controller'
-require_relative 'mock_rover_app'
 
 describe "ApplicationController" do
 
@@ -93,14 +92,6 @@ MMRMMRMRRM"
       ApplicationController.deliver_rover_commands
       rover_1_status = @rovers[0].status
       expect(rover_1_status).to eq("1 3 N")
-    end
-
-  end
-
-  context "Parse and Execute:" do
-
-    it "runs user input through parser and has rovers execute commands" do
-      expect(ApplicationController.parse_and_execute(user_input)).to eq(["1 3 N", "5 1 E"])
     end
 
   end

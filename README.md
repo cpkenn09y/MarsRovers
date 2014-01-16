@@ -32,15 +32,23 @@ Once I restructured my code to encompass this change, it became possible to repr
 
 ## To Run the Application:
 
-1) From the Terminal, go into the folder containing all the files
-2) Type the following code:
-* ruby application_controller.rb
+1. From the Terminal, go into the root directory
+2. Copy and Paste the Following Code:
 
-Note: For funsies, open up application.rb and uncomment the lines of code specified at the bottom. It will run the program with three or eight rovers.
+* ruby mars_rover_application.rb
 
-## To Run the 42 Tests:
+#### For funsies:
 
-1) From the Terminal, go into the folder containing all the files
-2) Type the following code:
-* rspec application_controller_spec.rb rover_command_parser_spec.rb grid_spec.rb mars_rover_spec.rb
+Run with three rovers:
+* ruby mars_rover_application.rb 3_rovers.txt
+
+Run with eight rovers:
+* ruby mars_rover_application.rb 8_rovers.txt
+
+## To Run the 40 Tests:
+
+1. From the Terminal, go into the root directory
+2. Copy and Paste the Following Code:
+
+* rspec mars_rover_application_spec.rb application_controller_spec.rb rover_command_parser_spec.rb grid_spec.rb mars_rover_spec.rb
 

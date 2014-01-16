@@ -12,38 +12,6 @@ class ApplicationController
     @rovers_movement_data = nil
     @rovers = nil
 
-    def parse_and_execute(user_input)
-      parse_command(user_input)
-
-      set_setup_data
-      set_rovers_movement_data
-      rovers_starting_configurations = get_starting_configurations
-
-      create_rovers(rovers_starting_configurations)
-
-      grid_dimensions = get_grid_dimension
-      create_grid(grid_dimensions)
-
-      puts "INITIAL POSITION OF ROVERS:"
-      place_rovers_on_grid
-      print_grid
-
-      deliver_rover_commands
-      reset_grid
-
-
-      puts "FINAL POSITION OF ROVERS:"
-      place_rovers_on_grid
-      print_grid
-      rovers_status = get_rovers_status
-
-
-      puts "- - - - - - - - - - - - - - - - -"
-      puts "FINAL OUTPUT:"
-      puts rovers_status
-      rovers_status
-    end
-
     def parse_command(user_input)
       @parsed_command = RoverCommandParser.assess(user_input)
     end
