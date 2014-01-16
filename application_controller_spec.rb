@@ -1,5 +1,6 @@
 require 'rspec'
 require_relative 'application_controller'
+require_relative 'mock_rover_app'
 
 describe "ApplicationController" do
 

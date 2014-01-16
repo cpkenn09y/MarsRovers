@@ -25,15 +25,16 @@ class ApplicationController
       create_grid(grid_dimensions)
 
       puts "INITIAL POSITION OF ROVERS:"
-      placeRoversOnGrid
-
+      place_rovers_on_grid
+      print_grid
 
       deliver_rover_commands
       reset_grid
 
 
       puts "FINAL POSITION OF ROVERS:"
-      placeRoversOnGrid
+      place_rovers_on_grid
+      print_grid
       rovers_status = get_rovers_status
 
 
@@ -77,7 +78,7 @@ class ApplicationController
       @rovers = rovers
     end
 
-    def placeRoversOnGrid
+    def place_rovers_on_grid
 
       @rovers.each_with_index do |rover, index|
         avatar = (index + 1).to_s
@@ -85,6 +86,9 @@ class ApplicationController
         @current_grid.place_onto_grid(avatar, target_location, rover.orientation)
       end
 
+    end
+
+    def print_grid
       @current_grid.print
     end
 
@@ -112,52 +116,3 @@ class ApplicationController
   end
 
 end
-
-user_input_given =
-"5 5
-1 2 N
-LMLMLMLMM
-3 3 E
-MMRMMRMRRM"
-
-ApplicationController.parse_and_execute(user_input_given)
-
-
-
-### Uncomment Lines 125-134 to run the application with three rovers :) ###
-
-# user_input_3_rovers =
-# "4 4
-# 3 2 N
-# LMML
-# 3 3 W
-# MMR
-# 4 2 S
-# MRR"
-
-# ApplicationController.parse_and_execute(user_input_3_rovers)
-
-
-### Uncomment Lines 141-160 to run the application with eight rovers ###
-
-
-# user_input_8_rovers =
-# "8 8
-# 3 4 N
-# MRM
-# 2 1 E
-# LMMR
-# 5 5 S
-# MML
-# 4 4 N
-# MMRM
-# 5 2 E
-# MMR
-# 0 0 N
-# MMRMLL
-# 7 7 S
-# MMRMM
-# 6 1 W
-# MMRMML"
-
-# ApplicationController.parse_and_execute(user_input_8_rovers)
