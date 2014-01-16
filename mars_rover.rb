@@ -5,9 +5,9 @@ class MarsRover
 
   attr_reader :location, :orientation
 
-  def initialize(configuration)
-    @location = get_location(configuration)
-    @orientation = get_orientation(configuration)
+  def initialize(rover_data)
+    @location = get_location(rover_data)
+    @orientation = get_orientation(rover_data)
     @status = status
   end
 

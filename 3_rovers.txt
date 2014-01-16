@@ -1,0 +1,7 @@
+4 4
+3 2 N
+LMML
+3 3 W
+MMR
+4 2 S
+MRR

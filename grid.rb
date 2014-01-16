@@ -20,13 +20,19 @@ class Grid
     @layout_1d.map! {|grid_unit| grid_unit = "0"}
   end
 
-  def place_onto_grid(avatar, target_location, rover_orientation)
-    cleaned_target_coordinate = convert_to_coordinate(target_location)
-    x_coordinate = cleaned_target_coordinate[0]
-    y_coordinate = cleaned_target_coordinate[1]
-    puts "Placing #{avatar} at the location (#{x_coordinate}, #{y_coordinate}) #{rover_orientation}"
+  # def place_onto_grid(avatar, target_location, rover_orientation)
+  #   cleaned_target_coordinate = convert_to_coordinate(target_location)
+  #   x_coordinate = cleaned_target_coordinate[0]
+  #   y_coordinate = cleaned_target_coordinate[1]
+  #   puts "Placing #{avatar} at the location (#{x_coordinate}, #{y_coordinate}) #{rover_orientation}"
+  #   grid_index_to_replace = get_grid_index_to_replace(x_coordinate, y_coordinate)
+  #   @layout_1d[grid_index_to_replace] = avatar
+  # end
+
+  def place_on_grid(positionable_object)
     grid_index_to_replace = get_grid_index_to_replace(x_coordinate, y_coordinate)
-    @layout_1d[grid_index_to_replace] = avatar
+
+    positionable_object.
   end
 
   private

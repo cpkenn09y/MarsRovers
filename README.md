@@ -30,17 +30,25 @@ As an illustration, I drew out a 3x3 box, made up of 9 small squares. I learned 
 
 Once I restructured my code to encompass this change, it became possible to represent the rovers moving along the axes of my grid.
 
+## Note: This application runs on Ruby version 1.9.3
+
 ## To Run the Application:
 
 1) From the Terminal, go into the folder containing all the files
-2) Type the following code:
-* ruby application_controller.rb
+2) Copy and Paste the following into the Terminal:
+* ruby application_controller.rb thoughtworks_input.txt
 
-Note: For funsies, open up application.rb and uncomment the lines of code specified at the bottom. It will run the program with three or eight rovers.
+#### For funsies, you can run this program with multiple rovers
 
-## To Run the 42 Tests:
+For 3 rovers:
+* ruby application_controller.rb 3_rovers.txt
+
+For 8 rovers:
+* ruby application_controller.rb 8_rovers.txt
+
+## To Run the 39 Tests:
 
 1) From the Terminal, go into the folder containing all the files
-2) Type the following code:
+2) Copy and Paste the following into the Terminal:
 * rspec application_controller_spec.rb rover_command_parser_spec.rb grid_spec.rb mars_rover_spec.rb
 

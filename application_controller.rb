@@ -1,6 +1,7 @@
 require_relative 'mars_rover'
 require_relative 'rover_command_parser'
 require_relative 'grid'
+require 'debugger'
 
 class ApplicationController
 
@@ -113,51 +114,32 @@ class ApplicationController
 
 end
 
-user_input_given =
-"5 5
-1 2 N
-LMLMLMLMM
-3 3 E
-MMRMMRMRRM"
+# debugger
 
-ApplicationController.parse_and_execute(user_input_given)
+case ARGV[0]
+when nil
+  f = File.open("TW_input.txt")
+  user_input = f.read
+  f.close
 
+  ApplicationController.parse_and_execute(user_input)
+when "application_controller_spec.rb"
+else
+  f = File.open(ARGV[0])
+  user_input = f.read
+  f.close
 
-
-### Uncomment Lines 125-134 to run the application with three rovers :) ###
-
-# user_input_3_rovers =
-# "4 4
-# 3 2 N
-# LMML
-# 3 3 W
-# MMR
-# 4 2 S
-# MRR"
-
-# ApplicationController.parse_and_execute(user_input_3_rovers)
+  ApplicationController.parse_and_execute(user_input)
+end
 
 
-### Uncomment Lines 141-160 to run the application with eight rovers ###
 
 
-# user_input_8_rovers =
-# "8 8
-# 3 4 N
-# MRM
-# 2 1 E
-# LMMR
-# 5 5 S
-# MML
-# 4 4 N
-# MMRM
-# 5 2 E
-# MMR
-# 0 0 N
-# MMRMLL
-# 7 7 S
-# MMRMM
-# 6 1 W
-# MMRMML"
 
-# ApplicationController.parse_and_execute(user_input_8_rovers)
+# if ARGV[0] != "application_controller_spec.rb"
+# f = File.open(ARGV[0])
+# user_input = f.read
+# f.close
+
+# ApplicationController.parse_and_execute(user_input)
+# end
